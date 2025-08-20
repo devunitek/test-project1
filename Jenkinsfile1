@@ -14,14 +14,4 @@ pipeline {
             }
         }
     }
-    post {
-        success {
-            echo "✅ Deployment succeeded: ${env.REPO_NAME}"
-            // Trigger Pipeline 2 automatically
-            build job: 'add-xampp-vhost'
-        }
-        failure {
-            echo "❌ Deployment failed → add-xampp-vhost will not run."
-        }
-    }
 }
