@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+    environment {
+        BASE_DIR = "/home/unitekserver/projects/web-projects"
+    }
+    stages {
+        stage('Deploy Project') {
+            steps {
+                script {
+                    echo "🔹 Deploying project..."
+                    // Run deployment script
+                    sh "bash $BASE_DIR/bash/deployment.sh $GIT_URL"
+                }
+            }
+        }
+    }
+    post {
+        success {
+            echo "✅ Deployment succeeded: ${env.REPO_NAME}"
+            // Trigger Pipeline 2 automatically
+            build job: 'add-xampp-vhost',
+                  parameters: [string(name: 'REPO_NAME', value: env.REPO_NAME)]
+        }
+        failure {
+            echo "❌ Deployment failed → add-xampp-vhost will not run."
+        }
+    }
+}
