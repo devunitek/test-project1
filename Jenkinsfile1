@@ -18,8 +18,7 @@ pipeline {
         success {
             echo "✅ Deployment succeeded: ${env.REPO_NAME}"
             // Trigger Pipeline 2 automatically
-            build job: 'add-xampp-vhost',
-                  parameters: [string(name: 'REPO_NAME', value: env.REPO_NAME)]
+            build job: 'add-xampp-vhost'
         }
         failure {
             echo "❌ Deployment failed → add-xampp-vhost will not run."
