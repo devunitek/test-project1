@@ -4,12 +4,11 @@ pipeline {
         BASE_DIR = "/home/unitekserver/projects/web-projects"
     }
     stages {
-        stage('Add XAMPP VirtualHost') {
+        stage('Deploy Project') {
             steps {
                 script {
                     echo "🔹 Adding XAMPP VirtualHost"
-                    sh "bash $BASE_DIR/bash/add-xampp-vhost.sh"
-                }
+                    sh "bash $BASE_DIR/bash/add-xampp-vhost.sh"                }
             }
         }
     }
