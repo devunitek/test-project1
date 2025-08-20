@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    parameters {
-        string(name: 'REPO_NAME', defaultValue: '', description: 'Name of the project')
-    }
     environment {
         BASE_DIR = "/home/unitekserver/projects/web-projects"
     }
@@ -10,11 +7,8 @@ pipeline {
         stage('Add XAMPP VirtualHost') {
             steps {
                 script {
-                    if (!params.REPO_NAME) {
-                        error "❌ REPO_NAME not provided."
-                    }
-                    echo "🔹 Adding XAMPP VirtualHost for ${params.REPO_NAME}"
-                    sh "bash $BASE_DIR/bash/add-xampp-vhost.sh ${params.REPO_NAME}"
+                    echo "🔹 Adding XAMPP VirtualHost"
+                    sh "bash $BASE_DIR/bash/add-xampp-vhost.sh"
                 }
             }
         }
